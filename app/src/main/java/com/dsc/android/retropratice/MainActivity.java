@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
 //        createMockList();
         apicall();
-        setUpRecyclerView();
+
     }
     private void setUpRecyclerView(){
         recyclerViewAdapter = new RecyclerViewAdapter(this);
@@ -43,13 +43,14 @@ public class MainActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     if(response.body()!=null){
                         userList.addAll(response.body().getRecyclerViewData());
+                        setUpRecyclerView();
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<UserWrapper> call, Throwable t) {
-
+                apicall();
             }
         });
     }
